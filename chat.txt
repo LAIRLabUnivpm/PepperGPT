@@ -619,3 +619,41 @@ Esplorando mondi oltre la realtà.
 2024-05-23 16:37:14 Risposta: Nella terra di Itaca, Ulisse navigò, tra mostri e Dei, la sua storia cantò. Con astuzia e coraggio, la sua casa ritrovò, Odissea eterna, nel tempo restò.
 2024-05-23 16:37:37 Domanda: Parlami della vita oltre la morte
 2024-05-23 16:37:39 Risposta: La vita oltre la morte è un argomento di discussione diffuso in molte culture e religioni, ognuna con le proprie interpretazioni e credenze sull'esistenza dopo la vita terrena.
+2024-06-13 11:57:45 Domanda: Cosa posso mangiare questa sera
+2024-06-13 11:57:48 Risposta: Puoi mangiare pasta al pomodoro o una insalata mista.
+2024-06-13 11:57:59 Domanda: invece dell'insalata mi consigli qualcos'altro
+2024-06-13 11:58:02 Risposta: Potresti optare per una zuppa leggera o una frittata con verdure.
+2024-06-13 11:58:10 Domanda: Non ho capito, puoi ripetere?
+2024-06-13 11:58:10 Risposta: Non ho capito, puoi ripetere?
+2024-06-13 11:58:22 Domanda: Ok allora se dovessi andare a mangiare fuori Cosa posso mangiare
+2024-06-13 11:58:25 Risposta: Potresti optare per un ristorante che offre piatti a base di pesce o una trattoria che serve cucina tradizionale locale.
+2024-06-13 11:58:40 Domanda: Ok se volessi Restare in forma Cosa mi consigli di mangiare
+2024-06-13 11:58:43 Risposta: Ti consiglio di consumare cibi ricchi di proteine come carne magra, pesce, uova, latticini e legumi, e di includere molta frutta e verdura nella tua dieta.
+2024-06-13 11:59:03 Domanda: Quale frutta contiene più proteine
+2024-06-13 11:59:06 Risposta: Le noci di cocco, avocado, guava, e pesca sono alcune delle frutta con un contenuto proteico relativamente più alto.
+2024-06-13 11:59:21 Domanda: invece le verdure più ricche di fibre
+2024-06-13 11:59:23 Risposta: Le verdure ricche di fibre includono piselli, carciofi, broccoli, cavolo e spinaci.
+2024-06-13 11:59:38 Domanda: al posto delle uova Cosa posso mangiare
+2024-06-13 11:59:41 Risposta: Puoi considerare il consumo di alternative vegetali come tofu, semi di chia o semi di lino come sostituti delle uova.
+2024-06-13 11:59:51 Domanda: Non ho capito, puoi ripetere?
+2024-06-13 11:59:51 Risposta: Non ho capito, puoi ripetere?
+2024-06-13 12:00:02 Domanda: Quanto tempo devo camminare al giorno
+2024-06-13 12:00:05 Risposta: Circa 30 minuti di camminata al giorno possono essere benefici per la salute fisica e mentale.
+2024-06-13 12:34:36 Domanda: Cosa sono gli antibiotici
+2024-06-13 12:34:39 Risposta: Gli antibiotici sono farmaci utilizzati per trattare le infezioni batteriche nel corpo umano.
+2024-06-13 12:34:52 Domanda: cos'è l'antibiotico Resistenza
+2024-06-13 12:34:59 Risposta: L'antibiotico resistenza è la capacità dei batteri di resistere agli effetti degli antibiotici, rendendoli inefficaci nel trattamento delle infezioni batteriche.
+2024-06-13 12:35:15 Domanda: Cosa studia la farmacologia
+2024-06-13 12:35:19 Risposta: La farmacologia è lo studio degli effetti dei farmaci sul corpo, comprese le interazioni, gli effetti collaterali e l'efficacia.
+2024-06-13 12:35:30 Domanda: Non ho capito, puoi ripetere?
+2024-06-13 12:35:30 Risposta: Non ho capito, puoi ripetere?
+2024-06-13 12:35:39 Domanda: Cosa studia l'anatomia
+2024-06-13 12:35:41 Risposta: L'anatomia studia la struttura del corpo umano, compresi gli organi, i tessuti e i sistemi.
+2024-06-13 12:35:54 Domanda: Cosa studia la fisiologia
+2024-06-13 12:35:57 Risposta: La fisiologia studia il funzionamento e le reazioni del corpo umano.
+2024-06-13 12:36:05 Domanda: Non ho capito, puoi ripetere?
+2024-06-13 12:36:05 Risposta: Non ho capito, puoi ripetere?
+2024-06-13 12:36:16 Domanda: Spiegami il meccanismo dell'elettrocardiogramma
+2024-06-13 12:36:18 Risposta: L'elettrocardiogramma registra l'attività elettrica del cuore tramite elettrodi posti sul corpo, evidenziando l'onda di depolarizzazione e ripolarizzazione dei cardiomiociti durante il ciclo cardiaco.
+2024-06-13 12:36:37 Domanda: Cosa sono gli elettrodi
+2024-06-13 12:36:40 Risposta: Gli elettrodi sono dispositivi conduttivi utilizzati per trasferire corrente elettrica tra un circuito e un materiale non conduttivo, come ad esempio la pelle umana nel caso dell'elettrocardiogramma.
