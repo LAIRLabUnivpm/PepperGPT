@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?><ChoregrapheProject xmlns="http://www.aldebaran-robotics.com/schema/choregraphe/project.xsd" xar_version="3"><Box name="root" id="-1" localization="8" tooltip="Root box of Choregraphe&apos;s behavior. Highest level possible." x="0" y="0"><bitmap>media/images/box/root.png</bitmap><script language="4"><content><![CDATA[]]></content></script><Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" /><Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" /><Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" /><Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" /><Timeline enable="0"><BehaviorLayer name="behavior_layer1"><BehaviorKeyframe name="keyframe1" index="1"><Diagram scale="100"><Box name="receive (1)" id="5" localization="8" tooltip="receive" x="236" y="74"><bitmap>media/images/box/box-python-script.png</bitmap><script language="4"><content><![CDATA[import sys
+sys.path.append("/home/nao")
+
+import paho.mqtt.publish as publish
+import paho.mqtt.client as mqtt
+import time
+
+class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+        self.tts = ALProxy('ALTextToSpeech')
+        self.tts.setLanguage("Italian")
+        self.signalTTS = ALProxy('ALMemory')
+
+    def onLoad(self):
+        #put initialization code here
+        pass
+
+    def onUnload(self):
+        #put clean-up code here
+        pass
+
+    def onInput_onStart(self):
+
+        host = "192.168.43.197"   # indirizzo broker
+        #host = "localhost"
+
+        def on_connect(client,userdata,flags,rc):
+            client.subscribe([("/domanda1",0),("/risposta",0)])
+
+            self.tts.say("Ponimi un quesito")
+
+            time.sleep(2)
+            publish.single("/domanda1","ok",hostname=host,port=1883,protocol=mqtt.MQTTv31,qos=0)
+
+        def on_message(client,userdata,msg):
+
+            stringa = msg.payload
+            if stringa == "stop":
+                exit()
+
+            if msg.topic == '/risposta':
+                self.tts.say(stringa)
+                #segnale = 0
+                while 1:
+                    [a,b] = self.signalTTS.getData('ALTextToSpeech/Status')
+                    #time.sleep(0.1)
+                    if b == 'done':
+                        time.sleep(2)
+                        publish.single("/domanda1","ok",hostname=host,port=1883,protocol=mqtt.MQTTv31,qos=0)
+                        break
+
+            #publish.single("/domanda1","ok",hostname=host,port=1883,protocol=mqtt.MQTTv31,qos=0)
+
+            self.onStopped()
+
+        sub = mqtt.Client(protocol=mqtt.MQTTv31)
+
+        sub.on_connect = on_connect
+        sub.on_message = on_message
+
+        sub.connect(host,keepalive=60)
+
+        sub.loop_forever()
+        self.onStopped()
+
+    def onInput_onStop(self):
+        pass]]></content></script><Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" /><Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" /><Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" /><Output name="onStopped" type="1" type_size="1" nature="2" inner="0" tooltip="" id="4" /></Box><Link inputowner="0" indexofinput="4" outputowner="5" indexofoutput="4" /><Link inputowner="5" indexofinput="2" outputowner="0" indexofoutput="2" /></Diagram></BehaviorKeyframe></BehaviorLayer></Timeline></Box></ChoregrapheProject>

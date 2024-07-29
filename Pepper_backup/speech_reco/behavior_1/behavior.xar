@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?><ChoregrapheProject xmlns="http://www.aldebaran-robotics.com/schema/choregraphe/project.xsd" xar_version="3"><Box name="root" id="-1" localization="8" tooltip="Root box of Choregraphe&apos;s behavior. Highest level possible." x="0" y="0"><bitmap>media/images/box/root.png</bitmap><script language="4"><content><![CDATA[]]></content></script><Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" /><Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" /><Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" /><Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" /><Timeline enable="0"><BehaviorLayer name="behavior_layer1"><BehaviorKeyframe name="keyframe1" index="1"><Diagram><Box name="speech_reco" id="10" localization="8" tooltip="" x="240" y="37"><bitmap>media/images/box/box-python-script.png</bitmap><script language="4"><content><![CDATA[import time
+
+class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+        self.asr = ALProxy("ALSpeechRecognition")
+        self.memory = ALProxy("ALMemory")
+        self.tts = ALProxy("ALTextToSpeech")
+
+    def onLoad(self):
+        pass
+
+    def onUnload(self):
+        pass
+
+    def onInput_onStart(self):
+        self.asr.setLanguage("Italian")
+        self.asr.setVocabulary( ["start","stop"],0)
+        self.memory.subscribeToEvent("WordRecognized", self.getName(), "onWordRecognized")
+        valore = self.memory.getData("WordRecognized")
+        if valore[0] == 'start':
+            self.tts.say("ok")
+
+
+    def onInput_onStop(self):
+        self.onStopped() #activate the output of the box
+
+    def onWordRecognized(self, key, value, message):
+        if(len(value)) > 1 and value[1] >= 0.5:
+            if value[0] == 'start':
+                self.tts.say("start")
+                #self.onStopped()
+            elif value[0] == 'stop':
+                self.tts.say("stop")
+                self.onStopped()
+            self.wordRecognized(value[0]) #~ activate output of the box
+        else:
+            self.onNothing()
+            #self.getParameter("Confidence threshold (%)")/100.)]]></content></script><Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" /><Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" /><Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" /><Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" /></Box><Box name="speech2" id="1" localization="8" tooltip="" x="69" y="251"><bitmap>media/images/box/box-python-script.png</bitmap><script language="4"><content><![CDATA[import time
+
+class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+        self.asr = ALProxy("ALSpeechRecognition")
+        self.memory = ALProxy("ALMemory")
+        self.status = ALProxy("ALMemory")
+        self.tts = ALProxy("ALTextToSpeech")
+
+    def onLoad(self):
+        #put initialization code here
+        pass
+
+    def onUnload(self):
+        #put clean-up code here
+        pass
+
+    def onInput_onStart(self):
+        #self.asr.setVisualExpression(self.getParameter("Visual expression"))
+        self.asr.setVocabulary( ["start","stop"],0)#, self.getParameter("Enable word spotting") )
+        #self.asr.pause(False)
+        #self.memory.subscribeToEvent("WordRecognized", self.getName(), "onWordRecognized")
+
+        self.asr.subscribe("WordRecognized")
+        while 1:
+
+            self.asr.getAudioExpression()
+            stato = self.status.getData("ALSpeechRecognition/Status")
+            value = self.memory.getData("WordRecognized")
+
+            if stato == 'ListenOff':
+                self.asr.pause(False)
+                self.asr.unsubscribe("WordRecognized")
+
+                if value[0] == 'start':
+                    self.tts.say("start")
+
+                    self.onStopped()
+                    #self.asr.pause(False)
+                elif value[0] == 'stop':
+                    #self.asr.unsubscribe("WordRecognized")
+                    #self.asr.pause(True)
+                    self.tts.say("stop")
+                    self.onStopped()
+            self.asr.pause(False)
+            self.asr.subscribe("WordRecognized")
+        #self.onStopped()
+
+    def onInput_onStop(self):
+        self.onStopped() #activate the output of the box
+
+    def onWordRecognized(self, key, value, message):
+        if(len(value) > 1 and value[1] >= self.getParameter("Confidence threshold (%)")/100.):
+            self.wordRecognized(value[0]) #~ activate output of the box
+        else:
+            self.onNothing()]]></content></script><Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" /><Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" /><Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" /><Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" /></Box><Box name="speech_no_callback" id="2" localization="8" tooltip="" x="238" y="141"><bitmap>media/images/box/box-python-script.png</bitmap><script language="4"><content><![CDATA[import time
+
+class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self, False)
+        self.asr = ALProxy("ALSpeechRecognition")
+        self.memory = ALProxy("ALMemory")
+        self.tts = ALProxy("ALTextToSpeech")
+
+    def onLoad(self):
+        pass
+
+    def onUnload(self):
+        pass
+
+    def onInput_onStart(self):
+        #self.asr.pause(False)
+        self.asr.setLanguage("Italian")
+        self.asr.setVocabulary( ["inizia","stop"],0)
+        #self.memory.subscribeToEvent("WordRecognized", self.getName(), "onWordRecognized")
+        #self.asr.subscribe("WordRecognized")
+        while 1:
+            self.asr.subscribe("WordRecognized")
+            time.sleep(0.5)
+            valore = self.memory.getData("WordRecognized")
+            if valore[1] >= 0.5:
+                self.asr.unsubscribe("WordRecognized")
+                if valore[0] == 'inizia':
+                    self.tts.say("inizia")
+                    #self.onStopped()
+                elif valore[0] == 'stop':
+                    self.tts.say("stop")
+                    #self.onStopped()
+                    break
+        #self.asr.unsubscribe("WordRecognized")
+        self.onStopped()
+
+    def onInput_onStop(self):
+        self.onStopped() #activate the output of the box
+
+    def onWordRecognized(self, key, value, message):
+        if(len(value)) > 1 and value[1] >= 0.5:
+            if value[0] == 'inizia':
+                self.tts.say("inizia")
+                #self.onStopped()
+            elif value[0] == 'stop':
+                self.tts.say("stop")
+                self.onStopped()
+            self.wordRecognized(value[0]) #~ activate output of the box
+        else:
+            self.onNothing()
+            #self.getParameter("Confidence threshold (%)")/100.)]]></content></script><Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" /><Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" /><Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" /><Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" /></Box><Link inputowner="0" indexofinput="4" outputowner="2" indexofoutput="4" /><Link inputowner="2" indexofinput="2" outputowner="0" indexofoutput="2" /></Diagram></BehaviorKeyframe></BehaviorLayer></Timeline></Box></ChoregrapheProject>
